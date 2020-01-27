@@ -10,31 +10,7 @@
   </head>
 
   <body>
-    <nav class="">
-
-        <div class="">
-          <%= link_to 'Gardenia', root_path, class: "" %>
-        </div>
-
-        <ul>
-          <% if user_signed_in? %>
-            <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to 'Sign up', new_user_registration_path %></li>
-            <li><%= link_to 'Log_in', new_user_session_path %></li>
-          <% end %>
-        </ul>
-
-        <ul class="">
-          <% if user_signed_in? %>
-            <li><%= link_to 'Add Movie', new_movie_path %></li>
-          <% end %>
-        </ul>
-
-      </div>
-    </nav> 
-
-    
+    <%= render 'shared/global_nav', location: 'top' %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <div class="container">

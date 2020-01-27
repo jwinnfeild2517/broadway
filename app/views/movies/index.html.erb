@@ -4,4 +4,6 @@
   </h2>
 <% end %>
 
-<%= link_to 'Add Movie', new_movie_path %>
+<% if user_signed_in? %>
+  <%= link_to 'Add Movie', new_movie_path %>
+<% end %>

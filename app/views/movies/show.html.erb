@@ -2,6 +2,11 @@
 <h3><%= @movie.director %></h3>
 <p><%= @movie.description %></p>
 
-<%= link_to 'Edit', edit_movie_path %>
-<%= link_to 'Delete', movie_path(@movie), method: :delete, data: {confirm: 'Are you sure'} %>
+<div class="links btn-group">
+<% if user_signed_in? %>
+    <% if @movie.user_id == current_user_id %>
+        <%= link_to 'Edit', edit_movie_path %>
+        <%= link_to 'Delete', movie_path(@movie), method: :delete, data: {confirm: 'Are you sure'} %>
+    <% end %>
+<% end %>
 <%= link_to 'Back', root_path %>
