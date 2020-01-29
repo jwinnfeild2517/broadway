@@ -1,19 +1,39 @@
-<nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <%= link_to 'Broadway', root_path, class: "navbar-brand" %>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to 'Home', root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to "Add Movie", new_movie_path %></li>
-          <% else %>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-            <li><%= link_to "Log in", new_user_session_path %></li>
-          <% end %>
-        <ul>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <% Category.all.order(:name).each do |category| %>
+          <% params[:category] == category.name ? active_selection = "dropdown-item active" : active_selection = "dropdown-item"%>
+          <li><%= link_to category.name, movies_path(category: category.name), class: active_selection %></li>
+         <% end %>
+        </ul>
+      </li>
 
-       
-      </div>
-    </nav>
+      <% if user_signed_in? %>
+        <li class="nav-item"><%= link_to 'Add Movie', new_movie_path, class: "nav-link active"  %></li>
+      <% end %>  
+      
+    </ul>
+
+     <ul class="navbar-nav justify-content-end">
+      <% if user_signed_in? %>
+        <li class="nav-item"><%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link active"  %></li>
+      <% else %>
+        <li class="nav-item"><%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Sign In', new_user_session_path, class: "nav-link" %></li>
+      <% end %>  
+    </ul>
+
+    
+    
+  </div>
+</nav>

@@ -1,7 +1,13 @@
 class MoviesController < ApplicationController
     before_action :find_movie, only: [:show, :edit, :update, :destroy]
     def index
-        @movies = Movie.all.order("created_at DESC")
+        if params[:category].blank?
+            @movies = Movie.all.order("created_at DESC")
+        else
+            @category = Category.find_by(name: params[:category])
+            @movies = Movie.where(category_id: @category.id).order("created_at DESC")
+        end
+        
     end
 
     def new
@@ -24,6 +30,7 @@ class MoviesController < ApplicationController
     end
 
     def edit  
+        @categories = Category.all.order(:name).map{|x| [x.name, x.id]} 
     end
 
     def update  
@@ -43,7 +50,7 @@ class MoviesController < ApplicationController
 
     private 
     def movie_params
-        params.require(:movie).permit(:title, :description, :director, :category_id)
+        params.require(:movie).permit(:title, :description, :director, :category_id, :picture)
     end
 
     def find_movie

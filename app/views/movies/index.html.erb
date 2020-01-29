@@ -1,9 +1,21 @@
-<% @movies.each do |movie| %>
-  <h2>
-    <%= link_to movie.title, movie_path(movie) %>
-  </h2>
-<% end %>
 
-<% if user_signed_in? %>
-  <%= link_to 'Add Movie', new_movie_path %>
+<h1><%= @category.name if @categrory %></h1>
+
+<% if @movies.blank? %>
+  <p>We Currently Do Not Have Any Movies in this Genre, Plase Check Back</p>
+<% else %>
+  <div class="cotainer">
+    <div class="row">
+      <% @movies.each do |movie| %>
+        <div class="col-sm">
+          <div class="card" style="width: 18rem;">
+            <%= image_tag(movie.picture, class: "card-img-top") if movie.picture.attached? %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to movie.title, movie_path(movie) %></h5>
+            </div> 
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>

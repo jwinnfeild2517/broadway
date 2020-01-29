@@ -24,11 +24,15 @@ gem 'pry', '~> 0.10.3'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-
 gem 'bootstrap', '~> 4.4.1'
 
+gem 'popper_js', '~> 1.14.5'
+
+gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
+
 gem 'simple_form', '~> 5.0', '>= 5.0.1'
+
+gem 'jquery-rails'
 
 gem 'devise', '~> 4.7', '>= 4.7.1'
 
