@@ -1,21 +1,29 @@
 
 <h1><%= @category.name if @categrory %></h1>
 
+
+
 <% if @movies.blank? %>
   <p>We Currently Do Not Have Any Movies in this Genre, Plase Check Back</p>
 <% else %>
   <div class="cotainer">
     <div class="row">
+      <% number_of_movies = @movies.length %>
       <% @movies.each do |movie| %>
+        <% if @movies.index(movie) == rand(0..number_of_movies) %>
+          <div class="col-sm">
+            <div class="card" style="width: 15rem;">
+              <%= render 'carousel_card' %>
+            </div>
+          </div>
+        <% end %>
         <div class="col-sm">
-          <div class="card" style="width: 18rem;">
-            <%= image_tag(movie.picture, class: "card-img-top") if movie.picture.attached? %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to movie.title, movie_path(movie) %></h5>
-            </div> 
+          <div class="card" style="width: 15rem;">
+            <%= link_to(image_tag(movie.picture, class: "card-img-top"), movie_path(movie)) %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 <% end %>
+

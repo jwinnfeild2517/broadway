@@ -15,6 +15,7 @@
  */
 
  @import "bootstrap";
+ @import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
 
 
  .card-title {
@@ -24,3 +25,33 @@
          color: grey;
      }
  }
+
+ .card {
+     border-color: #83677b;
+     border-radius: 5px;
+     border-width: medium;
+ }
+
+ .navbar {
+     background-color: #2e1114 !important;
+     color: white;
+ }
+
+
+ body {
+     background-color: #2e1114;
+ }
+
+
+ .navbar-brand {
+     color: whitesmoke !important;
+     font-family: 'Pacifico', cursive;
+ }
+
+
+ .navbar-light .navbar-nav .nav-link {
+    color: whitesmoke;
+    :hover {
+        color: #adadad;
+    }
+}

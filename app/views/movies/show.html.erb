@@ -1,15 +1,53 @@
-<h2><%= @movie.title %></h2>
-<h3><%= @movie.director %></h3>
-<%# <h4><%= @movie.category.name</h4>  %>
-<p><%= @movie.description %></p>
+<div class="container" style="">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters" style="">
+                    <div class="col-md-4">
+                        <%= image_tag @movie.picture, class: "card-img" %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= @movie.title %></h5>
+                            <p class="card-text"><p><%= @movie.description %></p></p>
+                            <p class="card-text"><small class="text-muted"><%= @movie.category.name%></small></p>
+                            <p class="card-text"><small class="text-muted">Director: <strong><%= @movie.director %></strong></small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%# <div class="col-sm-4">
+        <h5>Why You Should Watch It</h5>
+        <p class="card-text">This film works so well because it takes place in an underworld in which we are so embedded that we do not even observe it. Coppola puts us straight in the smack-dab center of what is, admittedly, a society made by criminals for criminals. It is also the reason why it's so welcoming. We are surrounded by its inhabitants--cold-blooded murderers, men who see crime like a 9 to 5 job masquerading as honorable men. And I do mean men. From the outside, we would only witness the horrifying, disturbing manifestations of their well-thought out actions.</p>
+        </div> %>
+    </div>
+</div>
 
 <div class="links btn-group">
-    <% if user_signed_in? %>
+        <% if user_signed_in? %>
 
-        <% if @movie.user_id == current_user.id %>
-            <%= link_to 'Edit', edit_movie_path %>
-            <%= link_to 'Delete', movie_path(@movie), method: :delete, data: {confirm: 'Are you sure'} %>
+            <% if @movie.user_id == current_user.id %>
+                <%= link_to 'Edit', edit_movie_path %>
+                <%= link_to 'Delete', movie_path(@movie), method: :delete, data: {confirm: 'Are you sure'} %>
+            <% end %>
         <% end %>
-    <% end %>
-    <%= link_to 'Back', root_path %>
+        <%= link_to 'Back', root_path %>
 </div>
+
+<div class="cotainer">
+    <div class="row">
+      <% Movie.all.each do |movie| %>
+        <div class="col-sm">
+          <div class="card" style="width: 17rem;">
+            <%= image_tag(movie.picture, class: "card-img-top") if movie.picture.attached? %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to movie.title, movie_path(movie) %></h5>
+            </div> 
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+
